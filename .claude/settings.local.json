@@ -1,7 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:docs.datadoghq.com)"
+      "WebFetch(domain:docs.datadoghq.com)",
+      "Bash(alias:*)",
+      "Read(/home/cj/**)",
+      "Bash(dotnet --version)",
+      "Bash(\"/mnt/c/Program Files/dotnet/dotnet.exe\" test --filter \"DatadogDirectOtlpTest\")",
+      "mcp__github__search_repositories",
+      "mcp__github__get_file_contents",
+      "Read(/mnt/c/dev/repos/opentelemetry-demo/**)",
+      "Read(/mnt/c/dev/repos/opentelemetry-demo/src/otel-collector/**)"
     ],
     "deny": [],
     "ask": []
