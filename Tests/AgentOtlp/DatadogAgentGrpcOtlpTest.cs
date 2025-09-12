@@ -28,7 +28,7 @@ public class DatadogAgentGrpcOtlpTest : IDisposable
     [Fact]
     public async Task MyTest_ShouldPass()
     {
-        using var activity = _instrumentation.ActivitySource.StartActivity("MyTest_ShouldPass");
+    using var activity = _instrumentation.ActivitySource.StartActivity("POST DistributedTracing_ShouldPropagateTraceContext");
         
         // Add test metadata
         activity?.SetTag("test.name", "MyTest_ShouldPass");
@@ -91,7 +91,7 @@ public class DatadogAgentGrpcOtlpTest : IDisposable
     [Fact]
     public async Task DatabaseOperation_ShouldCreateSpan()
     {
-        using var activity = _instrumentation.ActivitySource.StartActivity("DatabaseOperation_ShouldCreateSpan");
+    using var activity = _instrumentation.ActivitySource.StartActivity("Database Query: select users");
         
         // Add test metadata
         activity?.SetTag("test.name", "DatabaseOperation_ShouldCreateSpan");
@@ -136,7 +136,7 @@ public class DatadogAgentGrpcOtlpTest : IDisposable
     [Fact]
     public async Task HttpRequest_ShouldCreateSpan()
     {
-        using var activity = _instrumentation.ActivitySource.StartActivity("HttpRequest_ShouldCreateSpan");
+    using var activity = _instrumentation.ActivitySource.StartActivity("GET /users");
         
         // Add test metadata
         activity?.SetTag("test.name", "HttpRequest_ShouldCreateSpan");
@@ -180,11 +180,10 @@ public class DatadogAgentGrpcOtlpTest : IDisposable
 
     private async Task SomeMethodToTest()
     {
-        // Simulate some work with a nested span
-        using var nestedActivity = _instrumentation.ActivitySource.StartActivity("NestedOperation");
+    using var nestedActivity = _instrumentation.ActivitySource.StartActivity("business_logic NestedOperation");
         nestedActivity?.SetTag("operation.type", "business_logic");
         
-        await Task.Delay(100); // Simulate some processing time
+        await Task.Delay(100);
         
         nestedActivity?.SetTag("operation.duration_ms", 100);
         nestedActivity?.SetStatus(ActivityStatusCode.Ok);
@@ -192,12 +191,11 @@ public class DatadogAgentGrpcOtlpTest : IDisposable
 
     private async Task SimulateDatabaseOperation()
     {
-        // Simulate database work with a nested span
-        using var dbActivity = _instrumentation.ActivitySource.StartActivity("Database.Query");
+    using var dbActivity = _instrumentation.ActivitySource.StartActivity("Database Query: select users");
         dbActivity?.SetTag("db.system", "postgresql");
         dbActivity?.SetTag("db.statement", "SELECT * FROM users WHERE active = true");
         
-        await Task.Delay(50); // Simulate database query time
+        await Task.Delay(50);
         
         dbActivity?.SetTag("db.duration_ms", 50);
         dbActivity?.SetStatus(ActivityStatusCode.Ok);
@@ -205,12 +203,11 @@ public class DatadogAgentGrpcOtlpTest : IDisposable
 
     private async Task SimulateHttpRequest()
     {
-        // Simulate HTTP request with a nested span
-        using var httpActivity = _instrumentation.ActivitySource.StartActivity("Http.Request");
+    using var httpActivity = _instrumentation.ActivitySource.StartActivity("GET /users");
         httpActivity?.SetTag("http.client", "HttpClient");
         httpActivity?.SetTag("http.user_agent", "DatadogOtelPoc/1.0");
         
-        await Task.Delay(200); // Simulate HTTP request time
+        await Task.Delay(200);
         
         httpActivity?.SetTag("http.duration_ms", 200);
         httpActivity?.SetStatus(ActivityStatusCode.Ok);

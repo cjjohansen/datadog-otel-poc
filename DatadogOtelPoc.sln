@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectOtlpTests", "Tests\Di
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentOtlpTests", "Tests\AgentOtlp\AgentOtlpTests.csproj", "{A1234567-890A-BCDE-F123-456789ABCDEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Tests\Shared\Shared.csproj", "{B2345678-901B-CDEF-2345-6789ABCDEF01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureAgentOtlpTests", "Tests\AzureAgentOtlp\AzureAgentOtlpTests.csproj", "{C3456789-012C-DEF3-4567-89ABCDEF0123}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +24,14 @@ Global
 		{A1234567-890A-BCDE-F123-456789ABCDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1234567-890A-BCDE-F123-456789ABCDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1234567-890A-BCDE-F123-456789ABCDEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2345678-901B-CDEF-2345-6789ABCDEF01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2345678-901B-CDEF-2345-6789ABCDEF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2345678-901B-CDEF-2345-6789ABCDEF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2345678-901B-CDEF-2345-6789ABCDEF01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3456789-012C-DEF3-4567-89ABCDEF0123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3456789-012C-DEF3-4567-89ABCDEF0123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3456789-012C-DEF3-4567-89ABCDEF0123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3456789-012C-DEF3-4567-89ABCDEF0123}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

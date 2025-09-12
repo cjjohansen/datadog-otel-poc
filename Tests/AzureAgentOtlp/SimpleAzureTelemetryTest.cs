@@ -14,7 +14,7 @@ public class SimpleAzureTelemetryTest : IDisposable
     
     public SimpleAzureTelemetryTest()
     {
-        _instrumentation = OtlpInstrumentation.CreateForDirectOtlp();
+        _instrumentation = OtlpInstrumentation.CreateForAgent();
     }
 
     public void Dispose()
@@ -31,12 +31,14 @@ public class SimpleAzureTelemetryTest : IDisposable
         // Set span attributes
         span?.SetTag("test.name", "azure-connectivity");
         span?.SetTag("test.timestamp", DateTimeOffset.UtcNow.ToString("O"));
+        span?.SetTag("azure.environment", "test");
+        span?.SetTag("azure.deployment", "local-agent");
         
         // Verify span was created with proper trace context
         span.Should().NotBeNull();
         span?.Id.Should().NotBeNull(); // This is the span ID
         span?.TraceId.Should().NotBe(default(ActivityTraceId)); // This is the trace ID
         
-        // The span will be automatically exported to Azure when disposed
+        // The span will be automatically exported to Azure via local agent when disposed
     }
 }

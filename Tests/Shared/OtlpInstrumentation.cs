@@ -73,10 +73,21 @@ public class OtlpInstrumentation : IDisposable
     {
         var config = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
+            .AddEnvironmentVariables()
             .Build();
 
         var otlpConfig = config.GetSection("OtlpConfiguration").Get<OtlpConfiguration>() ?? new();
         var datadogConfig = config.GetSection("DatadogConfiguration").Get<DatadogConfiguration>() ?? new();
+        
+        // Override API key from environment variable if not provided in config
+        if (string.IsNullOrEmpty(datadogConfig.ApiKey))
+        {
+            var envApiKey = Environment.GetEnvironmentVariable("DD_API_KEY");
+            if (!string.IsNullOrEmpty(envApiKey))
+            {
+                datadogConfig = datadogConfig with { ApiKey = envApiKey };
+            }
+        }
         
         return new OtlpInstrumentation(otlpConfig, datadogConfig);
     }
